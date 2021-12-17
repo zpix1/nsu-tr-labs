@@ -1,0 +1,69 @@
+execve("async-test", 0x0804106C, 0x08041074)  argc = 1
+sysinfo(SI_MACHINE, "i86pc", 257)		= 6
+mmap(0x00000000, 32, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFA8B0000
+sysconfig(_CONFIG_PAGESIZE)			= 4096
+mmap(0x00000000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFB1B0000
+mmap(0x00000000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFBC80000
+mmap(0x00000000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFD980000
+memcntl(0xF0432000, 49764, MC_ADVISE, MADV_WILLNEED, 0, 0) = 0
+memcntl(0x08050000, 2608, MC_ADVISE, MADV_WILLNEED, 0, 0) = 0
+resolvepath("/usr/lib/ld.so.1", "/lib/ld.so.1", 1023) = 12
+getcwd("/home/students/19200/i.baksheev/private/nsu-tr-labs/4", 1012) = 0
+resolvepath("/home/students/19200/i.baksheev/private/nsu-tr-labs/4/async-test", "/home/students/19200/i.baksheev/private/nsu-tr-labs/4/async-test", 1023) = 64
+stat64("/home/students/19200/i.baksheev/private/nsu-tr-labs/4/async-test", 0x08040D00) = 0
+open("/var/ld/ld.config", O_RDONLY)		Err#2 ENOENT
+stat64("/lib/libc.so.1", 0x08040520)		= 0
+resolvepath("/lib/libc.so.1", "/lib/libc.so.1", 1023) = 14
+open("/lib/libc.so.1", O_RDONLY)		= 3
+mmapobj(3, MMOBJ_INTERPRET, 0xFD980AC0, 0x0804058C, 0x00000000) = 0
+close(3)					= 0
+memcntl(0xFE4A0000, 264368, MC_ADVISE, MADV_WILLNEED, 0, 0) = 0
+mmap(0x00000000, 4096, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFEA10000
+mmap(0x00010000, 24576, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON|MAP_ALIGN, -1, 0) = 0xFEDF0000
+getcontext(0x08040B40)
+getrlimit(RLIMIT_STACK, 0x08040B38)		= 0
+getpid()					= 16398 [16397]
+lwp_private(0, 1, 0xFEDF2A40)			= 0x000001C3
+setustack(0xFEDF2AA0)
+lwp_cond_broadcast(0xFD980CA4)			= 0
+lwp_cond_broadcast(0xFD980614)			= 0
+sysi86(SI86FPSTART, 0xFE605C6C, 0x0000133F, 0x00001F80) = 0x00000001
+sysconfig(_CONFIG_PAGESIZE)			= 4096
+schedctl()					= 0xFEFE3000
+priocntlsys(1, 0x08040EF0, 3, 0x08040F70, 0)	= 16398
+priocntlsys(1, 0x08040E70, 1, 0x08040ED0, 0)	= 4
+priocntlsys(1, 0x08040E20, 0, 0xFE5FBE28, 0)	= 4
+mmap(0x00000000, 131072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFEE58000
+mmap(0x00000000, 65536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0) = 0xFEFC0000
+sigaction(SIGCANCEL, 0x08040CB4, 0x00000000)	= 0
+sysconfig(_CONFIG_STACK_PROT)			= 7
+mmap(0x00000000, 1040384, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_NORESERVE|MAP_ANON, -1, 0) = 0xFEEB5000
+mmap(0x00010000, 65536, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANON|MAP_ALIGN, -1, 0) = 0xFEEA0000
+getcontext(0x08040B24)
+uucopy(0x08040AF0, 0xFEFB2FEC, 20)		= 0
+lwp_create(0x08040D94, LWP_SUSPENDED, 0x08040D90) = 2
+/2:	lwp_create()	(returning as new lwp ...)	= 0
+/1:	open("/proc/self/lwp/2/lwpname", O_WRONLY)	= 3
+/1:	write(3, "\0", 1)				= 1
+/1:	close(3)					= 0
+/1:	lwp_continue(2)					= 0
+/2:	setustack(0xFEEA02A0)
+/2:	schedctl()					= 0xFEFE3010
+/1:	lwp_kill(2, SIGCANCEL)				= 0
+/2:	    Received signal #36, SIGCANCEL [caught]
+/2:	      siginfo: SIGCANCEL pid=16398 uid=4375 code=-1
+/1:	lwp_sigmask(SIG_SETMASK, 0xFFBFFEFF, 0xFFFFFFF7, 0x000001FF, 0x00000000) = 0xFFBFFEFF [0xFFFFFFFF]
+/2:	sigfillset(0xFE605188)				= 0
+/1:	open("/usr/lib/locale/ru_RU.UTF-8/LC_MESSAGES/SUNW_OST_SGS.mo", O_RDONLY) Err#2 ENOENT
+/2:	lwp_sigmask(SIG_SETMASK, 0x00000000, 0x00000008, 0x00000000, 0x00000000) = 0xFFBFFEFF [0xFFFFFFFF]
+/1:	lwp_exit()
+/2:	setcontext(0xFEFB2A74)
+ioctl(1, TCGETA, 0xFEFB20C6)			Err#25 ENOTTY
+fstat64(1, 0xFEFB2108)				= 0
+brk(0x00000000)					= 145776640
+brk(0x08B06000)					= 0
+brk(0x08B0A000)					= 0
+fstat64(1, 0xFEFB2008)				= 0
+lwp_sigmask(SIG_SETMASK, 0xFFBFFEFF, 0xFFFFFFF7, 0x000001FF, 0x00000000) = 0xFFBFFEFF [0xFFFFFFFF]
+counted up to 100000000write(1, " c o u n t e d   u p   t".., 23)	= 23
+_exit(0)

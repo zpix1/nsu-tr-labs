@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html xmlns=http://www.w3.org/1999/xhtml style><!--
+ Page saved with SingleFile 
+ url: http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks?v=c9d 
+ saved date: Fri Dec 17 2021 15:55:55 GMT+0700 (Новосибирск, стандартное время)
+--><meta charset=utf-8>
+<title>MyWackoSite : Курс&nbsp;Операционные&nbsp;Системы&nbsp;/&nbsp;Практикум&nbsp;Posix&nbsp;Threads&nbsp;/&nbsp;Pthread&nbsp;Tasks</title>
+<meta name=keywords content>
+<meta name=description content>
+<style>:root{--sf-img-4:url("data:image/gif;base64,R0lGODlhEAAQAJEDAPAAAP///wAAAP///yH5BAEAAAMALAAAAAAQABAAAAInnI+py+0PlZh0MgGyFrdSFoRiwCHeJJYHpgECaZln846qNJL0HDkFADs=")}LI,TEXTAREA{font-family:Verdana;font-size:13px;line-height:1.3em}BODY{font-family:Verdana;font-size:13px;line-height:1.3;color:#000000;background-color:#F8F8F8}A:LINK{color:#993333}A:VISITED{color:#993366}OL{margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:0px}FORM,H1,H2{margin:0px;padding:0px}.main{font-size:22px}.header{padding:10px;padding-top:0px;line-height:22px}.page{background-color:#FFFFFF;padding:9px 10px 10px;border:1px inset;border-top:none;border-bottom:none}.pageBefore{border:1px inset;border-bottom:none;height:1px}.footer{background-color:#DDDDDD;padding:5px 10px;border:1px inset;border-top:1px solid #CCCCCC}.filesheader,.commentsheader{background-color:#DDDDDD;padding:2px 10px;border-left:1px inset;border-right:1px inset;border-top:1px solid #CCCCCC}.copyright{font-size:11px;color:#AAAAAA;text-align:right}.copyright A{color:#AAAAAA}.outerlink{color:#990000}.searchbar{background-color:#DDDDDD;font-family:Verdana;font-size:13px;line-height:1.3em}.nobr{white-space:nowrap}H1{font-family:Verdana;font-size:23px;padding-top:2px;padding-bottom:7px;line-height:110%}H2{font-family:Verdana;font-size:20px;margin-top:20px;margin-bottom:5px;border-bottom:3px #444444 solid}.code{background:#FFFFFF;border:solid #888888 2px;font-family:"Courier New";color:black;font-size:10pt;width:80%;padding:3px}.cl-red{color:#CC0000}.cl-green{color:#008000}.cl-blue{color:#0000CC}</style>
+<link rel=alternate type=application/rss+xml title="RecentChanges in RSS" href=http://parallels.nsu.ru/WackoWiki/xml/recentchanges_mywackosite.xml>
+<link rel=alternate type=application/rss+xml title="History/revisions of КурсОперационныеСистемы/ПрактикумPosixThreads/PthreadTasks in RSS" href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/revisions.xml>
+<link rel="shortcut icon" href="data:image/vnd.microsoft.icon;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTOjcpKioTExMTExMTExMTExMTExMTExMTExMTExMTEytfX19fXzYTExMTExMTExMTExMTExMTExMTExMTExMjPl9fX19fRxMTExMTExMTExMTExMTExMTExMTExMTEyNZGQAADF9fExMTExMTExMjExMTExMTExMTExMTExMhLF8GAAAAX18jExMTExMTIzo3KSoTExMTExMTExMTEyM/XwAAAABaXzoTExMTEyNQX19fXxMTExMTExMTExMTI1kcAAAAABVfWSETEyMrX18bXxlfNhMTExMTExMTEyEsXwcAAAAABV9fIxMjK19fBQANX19HExMTExMTExMTIz9fAAAAAAAAX180IzBfXwYAAAAPX1YTExMTExMTExMjWRwAAAYMAAAcX04sX18GAAAAAABfVhMTExMTExMTISxfBwAAHB4AAAtfX19fBgAAAAAAAF9HExMTExMTExMjP18AAABfXwAAAF9fXwUAAAASAAAAX18TExMTExMTEyNfHAAABV9fAAAAVF8FAAAAEloAAABfXxMTExMTExMhLF8CAAAZX1cPAAANAgAAAB9fVAAAAF9WExMTExMTEyNJXwAAAF9fPEIAAAAAAAAfX1NUAAAJX1YjExMTExMTI18SAAAMX0AyXwAAAAAAH181URcAAAhfRxMTExMTEyEsXwIAAB5fKytWBAAAAB9fMytOGAAAEV9GEyETExMTIUhfAAAAX1kjIzlDEQBCXzMjI1AZAAAVX0YTExMTExMTN0wVAw1fPiMjIzI4SV8pIRMjXwoAABVfNxMTExMTExMhKzJJVV8rExMiISMjIxMTIiNfCgAAQl8pExMTExMTExMTIyMrIiETExMTExMTExMpI18KAABFXykTExMTExMTExMTExMTExMTExMTExMTExMrXwAAAEVfIxMTExMTExMTExMTExMTExMTExMTExMTIStfAAAAX18jExMTExMTExMTExMTExMTExMTExMTExMTK18KCgBfXxMTExMTExMTExMTExMTExMTExMTExMTExMTNz5PT1xNExMTExMTExMTExMTExMTExMTExMTExMTExMTIyMjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAgAAAAQAAAAAEAIAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAB+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3++4/9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9/v+X/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f7/l/7jb8P+i1fL/ls/v/5nO7P+Zzuz/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3+/5f9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9/vuP/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3+/5f+Exu3///////////////////////////+m0uz/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3++4/9/v+X/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/gcLo/7fj/P///////////////////////////83n9/9/vuP/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3++4/9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3++4/+Exez/7fn//5qamv8AAAD/AAAA/0lISP///////////3+/5f9+veL/fr3i/3694v9+veL/fr3i/3694v9/vuP/gcHn/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9/vuP/fr3i/3694v9+veL/fr3i/3694v9+veL/gMDl/4fL8///////HBwc/wAAAP8AAAD/AAAA////////////gsLo/3694v9+veL/fr3i/3694v9+veL/f77j/4HB6P+42/D/otXy/5bP7/+Zzuz/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v+Bwuj/uuX+//////8AAAD/AAAA/wAAAP8AAAD/8fHx//////+53vT/f77j/3694v9+veL/fr3i/3+/5f+DxOv/2+/8//////////////////////9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f77j/4TF7P/t+f//qamp/wAAAP8AAAD/AAAA/wAAAP+CgoL//////+z3/f9/v+X/fr3i/3++4/+Bwef/hsnw////////////paam//////+enp7//////6bS7P9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v+AwOX/h8vz//////8gICD/AAAA/wAAAP8AAAD/AAAA/xgXF////////////4HC6P9/vuT/gcHn/4fM8////////////xgXF/8AAAD/WVlZ////////////zef3/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/4HC6P+65f7//////wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA////////////nNPy/4HC6P+Sz/X///////////8cHBz/AAAA/wAAAP8AAAD/ZGNi///////s9/3/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9/vuP/hMXs/+35//+pqan/AAAA/wAAAP8cHBz/S0tL/wAAAP8AAAD/rq6u///////S7Pv/iM31////////////HBwc/wAAAP8AAAD/AAAA/wAAAP8AAAD//////+z3/f9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/4DA5f+Hy/P//////yAgIP8AAAD/AAAA/66urv+urq7/AAAA/wAAAP9DQ0P//////////////////////xwcHP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP//////zef3/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/gcLo/7rl/v//////AAAA/wAAAP8AAAD///////v7+/8AAAD/AAAA/wAAAP////////////////8YFxf/AAAA/wAAAP8AAAD/enp6/wAAAP8AAAD/AAAA////////////fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3++4/+Exez//////6mpqf8AAAD/AAAA/xgXF////////////wAAAP8AAAD/AAAA/+Xl5f//////GBcX/wAAAP8AAAD/AAAA/3p6ev/z9PT/AAAA/wAAAP8AAAD///////////9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f7/l/4rN8///////CwoJ/wAAAP8AAAD/mpqa///////k/f//Z2Zm/wAAAP8AAAD/WVlZ/w8PDv8AAAD/AAAA/wAAAP+5ubn//////+Xl5f8AAAD/AAAA/wYGBv//////7Pf9/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v+Bwuj/wen+//////8AAAD/AAAA/wAAAP//////+f3//5bg///Gxsb/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/ubm5///////W/P//5eXl/wAAAP8AAAD/NDQ0///////s9/3/gsPp/3694v9+veL/fr3i/3694v9+veL/fr3i/4PF7P//////enp6/wAAAP8AAAD/SUhI//////+86v//jtX+//v7+/8AAAD/AAAA/wAAAP8AAAD/AAAA/76+vv//////ktb+/87z//+Ojo7/AAAA/wAAAP8uLS3//////83n9/9/v+X/fr3i/3694v9+veL/fr3i/3694v9/v+X/iMrx//////8LCgn/AAAA/wAAAP+0tLT//////4jN9f+HyvL/6vj//xMTE/8AAAD/AAAA/wAAAP++vr7//////5bR9f+GyfD/0e7//5SUlP8AAAD/AAAA/3Jycv//////xOP2/3++4/+Aweb/fr3i/3694v9+veL/fr3i/4DA5v/C5fr//////wAAAP8AAAD/AAAA///////q+P//hMbt/4LD6f+r3/z/0dHR/3Jycv8AAAD/wcLC//////+W0fX/gcLo/4PF7P/a8///mpqa/wAAAP8AAAD/hYWF///////E4/b/f77j/3694v9+veL/fr3i/3694v9+veL/f7/l/6LV8v/S5/T/hYWF/w8PDv9dXV3//////7fj/P+Bwuj/f7/l/4PF7P+K0Pn/odz9/8nr///5/f//ls/v/4HB5/9/vuT/g8Tr//n9//87Ozv/AAAA/wAAAP+CgoL//////6LV8v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/gcHn/4bK8f+O1f7/wen+/+Lo7P//////hMfu/3+/5f9+veL/jMPm/4HB5/+Cw+n/gsPp/4HC6P9/v+X/fr3i/4zD5v+DxOv/+f3//zs7O/8AAAD/AAAA/8bGxv//////ls/v/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/4LD6f+Exu3/hMfu/4rH6/+AwOX/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/kcfm/4TF7P//////Ozs7/wAAAP8AAAD/3Nzc//////+Wz+//fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f77j/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9/v+X/hsnw//////8AAAD/AAAA/wAAAP/Z2dn//////4LD6f9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/4DA5v+HzPP//////wAAAP8AAAD/AAAA////////////gcLo/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f77k/4TH7v//////Ozs7/zs7O/8AAAD///////////9/v+X/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/gMDm/6LV8v+y4v3/0e7//87s/v/0+v3/0un1/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/f7/l/4HC6P+Cw+n/gcLo/3+/5f9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/fr3i/3694v9+veL/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" type=image/x-icon><link rel=canonical href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks?v=c9d"><meta http-equiv=content-security-policy content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;"></head>
+<body>
+<form action=http://parallels.nsu.ru/WackoWiki/Login method=post>
+<div class=header>
+ <h1>
+ <span class=main>MyWackoSite:</span>
+ <a name=kursoperacionnyesistemy href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy?v=p5" title=Курс&nbsp;Операционные&nbsp;Системы>КурсОперационныеСистемы</a>/<a name=kursoperacionnyesistemy.praktikumposixthreads href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads?v=77v" title=Курс&nbsp;Операционные&nbsp;Системы&nbsp;/&nbsp;Практикум&nbsp;Posix&nbsp;Threads>ПрактикумPosixThreads</a>/PthreadTasks <a class=Search title href="http://parallels.nsu.ru/WackoWiki/TextSearch?phrase=%CA%F3%F0%F1%CE%EF%E5%F0%E0%F6%E8%EE%ED%ED%FB%E5%D1%E8%F1%F2%E5%EC%FB%2F%CF%F0%E0%EA%F2%E8%EA%F3%ECPosixThreads%2FPthreadTasks">...</a> 
+ </h1>
+ <a href=http://parallels.nsu.ru/WackoWiki/HomePage>Home&nbsp;Page</a> |
+ <a name=katalog href="http://parallels.nsu.ru/WackoWiki/Katalog?v=rvw" title=Каталог>Каталог</a> | <a name=izmenenija href="http://parallels.nsu.ru/WackoWiki/Izmenenija?v=fot" title=Изменения>Изменения</a> | <a name=novyekommentarii href="http://parallels.nsu.ru/WackoWiki/NovyeKommentarii?v=fot" title=Новые&nbsp;Комментарии>НовыеКомментарии</a> | <a name=pol_zovateli href="http://parallels.nsu.ru/WackoWiki/Pol'zovateli?v=fot" title=Пользователи>Пользователи</a> | <a name=registracija href="http://parallels.nsu.ru/WackoWiki/Registracija?v=rvw" title=Регистрация>Регистрация</a> |
+<span class=nobr><strong>Вход:&nbsp;</strong><input type=text name=name size=18 class=login value>&nbsp;Пароль:&nbsp;<input type=password name=password class=login size=8 value>&nbsp;<input type=image src="data:image/gif;base64,R0lGODlhIQAVAPcAALdpZ96/vdy8uty6uMeKiK5VUtavrbJdWphEQnEsK5dCQKVOTKJIRoQ0MrJeXMR+fLpxb4Q2NLpraKpYVsmNiphDQMiLiKRRTrhnZKlUUptEQqNNS8SCgIEzMcF7eJI8OrFZVtq3tNq1s6xXVX0yMMWHhdSqqZI/PII0MrhoZtOmpcF9e5xIRsuSj8uQjsqQja9bWLtta8mOjHkwLseHhcSEgsOBf8J8eaJKSK5YVrxwbbtpZrZmZH4yMJJAPpE+PIk3NrZhX7NhXrVfXc6Xla5dWsyTkcqPjYY3NcWEgcWAfsJ+e8N8er5zcXYvLXQuLLlua7tsablqaLlmY5VAPo48O408OqZTUZ1KSJtHRXMtLIs7OXcwL3gvLseIhsyUkrtubIo5N4w6OL51c8aFgsyWlIo6N9/DwL51csWDgKJLSMN/fbdiYKhST71xb7VkYahTUZxHRZpEQaNPTIk4Nbxvbb91c793dLVjYahSUK9gXcKal5xGQ9/EwsiJhm8rKqRIRo8+O9CqqL93dd/CwJ5LSq9aV7ySkNq4tcN+fKlQTb1wbeTOzMB5dpBAPYk6OI06Oc2VkqtaWNeuq7xua6hOTMqLiL94dplCP797ebxyb7lsarBcWoc4Ns2mpMSGg8qhnrhpaMB5d8qOi7RgXbRiX6pWVL50cYI1M3syMKZQTadST65XVKZNS9y9u8R/fr+Vk7JkYo88ObdqaJE9O75xb6dVU4k5N6FOS6NMSsaIhZ1IRp5IRZ5KR3wxMJtGQ97CwLBbWZRAPbaLiZdBP5ZCP6BJR8B3dZ5LSLRaWL50cpVBQJdBQK9fXJA7OncvLb52dL53db92dKBHRaBLSti1s9y7uYs5OKxaV7NjYd7Avoc1NMJ+fN/DwcJ/fY07OXsxL921tLVcWt23tqhRTrxxb7diX6pTUb1xbseJhseJh+DDwIA0MsB4dtWqqMuTkMF5d7JYVpY/Pdq5t7ZlY6lTUZxHRptFQ9ixr59FQ6xRTnVzbvv6+vLw7v///wAAACH5BAAAAAAALAAAAAAhABUAAAj/APsJHEiwoMGDBvkpXMiwocOHC//146clQYI/FhM8eeKEy7MZ4HyRQNGhQQQgdMxcs/LDB4Jh+yRS1KJl47MuM3D26NGhA4oIEbbR2SKGViBHwoohYHEo5sQZHZ+lmkGCXQdUqCIguRWGKCRntFoqtYcFGS5YTvn1IEFiLdYIncyECWNFFq0PVORVqHAPQZZC1OZcyLAnbYQGSBI/2mKlyokTVJYxq/DrXpZdvHapmbPhgq0JkkClBSLmWxXHPoopUCBHDh9e/hgYU7NgwYU8V0xNKNIslqe0H35AJoZAQ5w4WHIZy6XCnz9yGa7AMTQBWxE92VLMEpQWU+t7vYwl/1ejSlWbPPVMOM8BwwEpB0LohUoBBYKBtPmm4chF/gKccyM4J6CAQrwBAAASgKFJOWiIUk1agLSiyCoZZMAKDMFwMuCAGMwCBToQjDHIDSt4E0JalejTxgiGwHDAEA7g8QYPKUgQjnNg1HGKNNE0kskra6xhwwBpFcAKCAccYE4pU2AgQRQxbDKOc00oc4kHKyjBQRI0kKFLCQIUGc+LeGCwgxRR6LCIG02M4Q80NyzxAAccfJKOOgRYYAEFrqQVDwhDsLGDBHUsUosddxxDYiJrKFFDDX4QIAMFo7jQQgtHBJBWMkGwMUUUlLiBxh3wMLECN2mkQQYNXlhCwRGWGmdhxBfvvKBNWuIEMUWCi9jRjgdMJGIDGZ944UWeR7zQwhdllEEEEZF8oalMKrjjziQG4COCCCEgMo811ggggCsBaKPNGcCcsU43ffRBSB+MpLXPvPTWa++9+M4r0T/89uvvvwAH7G9AADs=" alt=">>>" align=top value></span>
+</div>
+</form>
+<div class=pageBefore><img src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width=1 height=1 border=0 alt style=display:block align=top></div><div class=page>
+Из&nbsp;принципа не&nbsp;буду исправлять замеченные опечатки, пока мне&nbsp;не&nbsp;напишут про&nbsp;них коммент.<br>
+<br>
+Условные обозначения<br>
+<span class=cl-red> <strong>Управление нитями</strong></span><br>
+<span class=cl-green> <strong>Мутексы и&nbsp;блокировки чтения-записи</strong></span><br>
+<span class=cl-blue> <strong>Ввод-вывод</strong></span><br>
+<em><strong>Другие примитивы синхронизации</strong></em><br>
+<u><strong>Масштабирование вычислений</strong></u><br>
+<strong>Задачи без&nbsp;категорий</strong><br>
+Задача “proxy” – задачи с&nbsp;номерами <span class=nobr>31–33</span>, для&nbsp;них режимов выделения WackoWiki не&nbsp;хватило<br>
+<br>
+Да, задача 31 попадает в&nbsp;две категории, proxy и&nbsp;ввод-вывод, это&nbsp;не&nbsp;ошибка.<br>
+<br>
+См.&nbsp;<a name=pthreadrules href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadRules?v=8k6">Pthread&nbsp;Rules</a>, как&nbsp;понимать эти&nbsp;категории<br>
+<a name=h168-1></a><h2>Задания практикума «Многопоточное программирование»</h2>
+<br>
+1. <span class=cl-red> <strong>Создание нити</strong></span><br>
+<br>
+Напишите программу, которая создает нить. Используйте атрибуты по&nbsp;умолчанию. Родительская и&nbsp;вновь созданная нити должны распечатать десять строк текста. <br>
+2. <span class=cl-red> <strong>Ожидание нити</strong></span><br>
+<br>
+Модифицируйте программу упр. 1 так, чтобы вывод родительской нити производился после завершения дочерней. Используйте pthread_join.<br>
+<br>
+3. <span class=cl-red> <strong>Параметры нити</strong></span><br>
+<br>
+Напишите программу, которая создает четыре нити, исполняющие одну и&nbsp;ту же&nbsp;функцию. Эта&nbsp;функция должна распечатать последовательность текстовых строк, переданных как&nbsp;параметр. Каждая из&nbsp;созданных нитей должна распечатать различные последовательности строк.<br>
+<br>
+4. <span class=cl-red> <strong>Принудительное завершение нити</strong></span><br>
+<br>
+Дочерняя нить должна распечатывать текст на&nbsp;экран. Через две&nbsp;секунды после создания дочерней нити, родительская нить должна прервать ее&nbsp;вызовом функции pthread_cancel.<br>
+<br>
+5. <span class=cl-red> <strong>Обработка завершения нити</strong></span><br>
+<br>
+Модифицируйте программу упр. 4 так, чтобы дочерняя нить перед завершением распечатывала сообщение об&nbsp;этом. Используйте pthread_cleanup_push.<br>
+<br>
+6. <span class=cl-red> <strong>Sleepsort</strong></span><br>
+<br>
+Реализуйте уникальный алгоритм сортировки sleepsort с&nbsp;асимптотикой <em>O(N)</em> (по процессорному времени). <br>
+На&nbsp;стандартный вход программы подается не&nbsp;более 100 строк различной длины. Вам&nbsp;необходимо вывести эти&nbsp;строки, отсортированные по&nbsp;длине. Строки одинаковой длины могут выводиться в&nbsp;произвольном порядке.<br>
+<br>
+Для&nbsp;каждой входной строки, создайте нить и&nbsp;передайте ей&nbsp;эту строку в&nbsp;качестве параметра. Нить должна вызвать sleep(2) или&nbsp;usleep(2) с&nbsp;параметром, пропорциональным длине этой строки. Затем нить выводит строку в&nbsp;стандартный поток вывода и&nbsp;завершается. Не&nbsp;следует выбирать коэффициент пропорциональности слишком маленьким, вы&nbsp;рискуете получить некорректную сортировку.<br>
+<br>
+7. <span class=cl-blue> <strong>Многопоточный cp&nbsp;-R</strong></span><br>
+<br>
+Реализуйте многопоточную программу рекурсивного копирования дерева подкаталогов, функциональный аналог команды cp(1) с&nbsp;ключом -R. Программа должна принимать два&nbsp;параметра – полное путевое имя&nbsp;корневого каталога исходного дерева и&nbsp;полное путевое имя&nbsp;целевого дерева. Программа должна обходить исходное дерево каталогов при&nbsp;помощи opendir(3C)/readdir_r(3С) и&nbsp;определять тип&nbsp;каждого найденного файла при&nbsp;помощи stat(2). Для&nbsp;определения размера буфера для&nbsp;readdir_r используйте pathconf(2) (sizeof (struct dirent) + pathconf(directory)+1).<br>
+Для&nbsp;каждого подкаталога должен создаваться одноименный каталог в&nbsp;целевом дереве и&nbsp;запускаться отдельная нить, обходящая этот подкаталог. Для&nbsp;каждого регулярного файла должна запускаться нить, копирующая этот файл в&nbsp;одноименный файл целевого дерева при&nbsp;помощи open(2)/read(2)/write(2). Файлы других типов (символические связи, именованные трубы и&nbsp;др.) следует игнорировать.<br>
+<br>
+При&nbsp;копировании больших деревьев каталогов возможны проблемы с&nbsp;исчерпанием лимита открытых файлов. Очень важно закрывать дескрипторы обработанных файлов и&nbsp;каталогов при&nbsp;помощи close(2)/closedir(3C). Тем&nbsp;не&nbsp;менее, для&nbsp;очень больших деревьев этого может оказаться недостаточно. Допускается обход этой проблемы при&nbsp;помощи холостого цикла с&nbsp;ожиданием (если open(2) или&nbsp;readdir(3C) завершается с&nbsp;ошибкой EMFILE, то&nbsp;допускается сделать sleep(3C) и&nbsp;повторить попытку открытия через некоторое время).<br>
+<br>
+Обратите также внимание, что&nbsp;значения дескрипторов открытых файлов могут переиспользоваться, т.е. в&nbsp;разные моменты времени один и&nbsp;тот же&nbsp;дескриптор может указывать на&nbsp;разные файлы. Чтобы избежать связанных с&nbsp;этим проблем, избегайте передачи дескрипторов между нитями. Вся&nbsp;работа с&nbsp;дескриптором от&nbsp;создания до&nbsp;закрытия должна происходить в&nbsp;одной нити.<br>
+<br>
+Дополнительное упражнение: при&nbsp;помощи команды time(1) сравните ресурсы, потребляемые вашей программой и&nbsp;командой cp&nbsp;-R при&nbsp;копировании одного и&nbsp;того же&nbsp;дерева каталогов. Объясните наблюдаемые различия. Каким образом их&nbsp;можно устранить? Следует ли&nbsp;вообще реализовать копирование файлов таким способом и&nbsp;если да, то&nbsp;в каких условиях?<br>
+ <br>
+8. <u><strong>Вычисление Пи</strong></u><br>
+<br>
+Напишите программу, которая вычисляет число Пи&nbsp;при помощи ряда Лейбница <img src=data:image/jpeg;base64,R0lGODlh8wAzAPgAAP///AAAACwAAAAA8wAzAEAC/4SPqcvtD6OctNqLs94p8OV9nTiSoImmWIiypkvCqaxuQXhXdI3k/Lv7xYKQm/EI9AmXzGZTCSU6NUiV1HKlwLKSIHdqYH3B5LL5jE6r1+x2YzyBd61CeRmns7v3/P7prkem5OcwmHdkRKgQuPjDWHLwCNnoZwgmSfmBWfjyphj2GSo6mmbJYWqz2aMKwkqKRTcTy+PagohaN9sp6xiag0ubOASMJSxSNWNciUOc6dTMBr0sunOrfGF9fXibmk3lbQvOVxtHbmXOJP36gHysjc09zIqqboZelKRr47zPcL//j50+KjXanfK0x0XADga/1cOXzFXDhm4WrruIMaPGjbwcO3r8CDKkSF8DNZXcNbLFyX4qe6Xk1TImyoKE8ACw+EdmjJXHqN3EOWknzJk82/wC2qPoCqUsazK7+TKqVC1Tq35EGgbrCq3uRml9eAasUa46HGYjQu+s2J9qC1VTqwfu2TcB5QIju1YQ2VN751j9Wy6SmL6ACxuOlFSoJoUoJSKcFlbx0KagevqrCdXeOZ2UM5u83Mem5smdDyK2nLPi6cikM/xT5SW0tWdiunr+vJloYsyHe/v+DVxIAQA7>. Однопоточная версия такой программы доступна в&nbsp;файле <a href="http://swsoft.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/files?get=pi_serial.c" target=_blank title="Внешняя ссылка (откроется в новом окне)" class=outerlink><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect fill-opacity="0"/></svg>' alt border=0 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">pi_serial.c</a>. Количество потоков программы должно определяться параметром командной строки. Количество итераций может определяться во&nbsp;время компиляции. Для&nbsp;передачи частичных сумм ряда, подсчитанных потоками, используйте pthread_exit(3C)/pthread_join(3C).<br>
+<br>
+Обратите внимание, что&nbsp;на&nbsp;32разрядных платформах sizeof(double)&gt;sizeof(void *), поэтому частичную сумму ряда нельзя преобразовывать к&nbsp;указателю, для&nbsp;нее надо выделять собственную память.<br>
+<br>
+9. <u><strong>Вычисление Пи&nbsp;пока не&nbsp;надоест</strong></u><br>
+<br>
+Модифицируйте программу упражнения 8 так, чтобы сама по&nbsp;себе она&nbsp;не&nbsp;завершалась. Вместо этого, после нажания ^-C (после получения сигнала SIGINT) программа должна как&nbsp;можно скорее завершаться, собирать частичные суммы ряда и&nbsp;выводить полученное приближение числа. <br>
+<br>
+Рекомендации: ожидаемое решение состоит в&nbsp;том, что&nbsp;вы&nbsp;установите обработчик SIGINT. Этот обработчик должен устанавливать глобальную флаговую переменную. Вычислительные нити должны просматривать значение флага через некоторое количество итераций, например через 1000000, и&nbsp;выходить при&nbsp;помощи pthread_exit, если флаг установлен. Подумайте, как&nbsp;минимизировать ошибку, обусловленную тем, что&nbsp;разные потоки к&nbsp;моменту завершения успели пройти разное количество итераций. Скорее всего, такая минимизация должна обеспечиваться за&nbsp;счет увеличения времени между получением сигнала и&nbsp;выходом.<br>
+<br>
+10. <span class=cl-green> <strong>Обедающие философы</strong></span><br>
+<br>
+Возьмите за&nbsp;основу программу <a href="http://swsoft.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/files?get=din_phil.c" target=_blank title="Внешняя ссылка (откроется в новом окне)" class=outerlink><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect fill-opacity="0"/></svg>' alt border=0 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">din_phil.c</a>. Эта&nbsp;программа симулирует известную задачу про&nbsp;обедающих философов. Пять философов сидят за&nbsp;круглым столом и&nbsp;едят спагетти. Спагетти едят при&nbsp;помощи двух вилок. Каждые двое философов, сидящих рядом, пользуются общей вилкой. Философ некоторое время размышляет, потом пытается взять вилки и&nbsp;принимается за&nbsp;еду. Съев некоторое количество спагетти, философ освобождает вилки и&nbsp;снова начинает размышлять. Еще&nbsp;через некоторое время он&nbsp;снова принимается за&nbsp;еду, и&nbsp;т.д., пока спагетти не&nbsp;кончатся. Если одну из&nbsp;вилок взять не&nbsp;получается, философ ждет, пока она&nbsp;освободится. В&nbsp;программе din_phil.c философы симулируются при&nbsp;помощи нитей, периоды размышлений и&nbsp;еды – при&nbsp;помощи usleep(3C), а&nbsp;вилки – при&nbsp;помощи мутексов. Философы всегда берут сначала левую вилку, а&nbsp;потом правую. При&nbsp;некоторых обстоятельствах это&nbsp;может приводить к&nbsp;мертвой блокировке. Измените протокол взаимодействия философов с&nbsp;вилками таким образом, чтобы мертвых блокировок не&nbsp;происходило.<br>
+<br>
+11. <span class=cl-green> <strong>Синхронизированный вывод</strong></span><br>
+<br>
+Модифицируйте программу упр. 1 так, чтобы вывод родительской и&nbsp;дочерней нитей был&nbsp;синхронизован: сначала родительская нить выводила первую строку, затем дочерняя, затем родительская вторую строку и&nbsp;т.д. Используйте мутексы. Рекомендуется использовать мутексы типа PTHREAD_MUTEX_ERRORCHECK.<br>
+<br>
+Явные и&nbsp;неявные передачи управления между нитями (sleep(3C)/usleep(3C), sched_yield(3RT)) и&nbsp;холостые циклы разрешается использовать только на&nbsp;этапе инициализации. <br>
+<br>
+12. <strong>Синхронизированный вывод 2</strong><br>
+<br>
+Докажите, что&nbsp;задача 11 не&nbsp;может быть решена с&nbsp;использованием двух мутексов без&nbsp;использования других средств синхронизации.<br>
+<br>
+13. <em><strong>Синхронизированный вывод 3</strong></em><br>
+<br>
+Решите задачу 11 с&nbsp;использованием условной переменной и&nbsp;минимально необходимого количества мутексов.<br>
+<br>
+14. <em><strong>Синхронизированный вывод 4</strong></em><br>
+<br>
+Решите задачу 11 с&nbsp;использованием двух семафоров-счетчиков<br>
+<br>
+15. <strong>Синхронизированный вывод 5</strong><br>
+<br>
+Если вы&nbsp;решили задачи 12 и&nbsp;14, объясните, почему ваше доказательство неприменимо к&nbsp;семафорам-счетчикам.<br>
+<br>
+16. <em><strong>Синхронизированный вывод двух процессов</strong></em><br>
+<br>
+Решите задачу 11 с&nbsp;использованием двух процессов (а не&nbsp;нитей) и&nbsp;именованных семафоров-счетчиков<br>
+<br>
+17. <span class=cl-green> <strong>Синхронизированный доступ к&nbsp;списку</strong></span><br>
+<br>
+Родительская нить программы должна считывать вводимые пользователем строки и&nbsp;помещать их&nbsp;в начало связанного списка. Строки длиннее 80 символов можно разрезать на&nbsp;несколько строк. При&nbsp;вводе пустой строки программа должна выдавать текущее состояние списка. Дочерняя нить пробуждается каждые пять секунд и&nbsp;сортирует список в&nbsp;лексикографическом порядке (используйте пузырьковую сортировку). Все&nbsp;операции над&nbsp;списком должны синхронизоваться при&nbsp;помощи мутекса.<br>
+<br>
+18. <span class=cl-green> <strong>Синхронизированный доступ к&nbsp;списку 2</strong></span><br>
+<br>
+Переделайте программу упр. 17 так, чтобы с&nbsp;каждой записью (а также с&nbsp;заголовком списка) был&nbsp;связан свой собственный мутекс.<br>
+<br>
+Примечание: при&nbsp;перестановке записей списка, необходимой при&nbsp;реализации пузырьковой сортировки, необходимо блокировать мутексы трех записей.<br>
+<br>
+Примечание 2: чтобы избежать мертвых блокировок, мутексы записей, более близких к&nbsp;началу списка, всегда захватывайте раньше.<br>
+<br>
+Примечание 3: преподаватель может потребовать, чтобы программа включала две&nbsp;или более сортирующие нити, а&nbsp;также потребовать изменить интервал между сортировками.<br>
+<br>
+19. <span class=cl-green> <strong>Синхронизированный доступ к&nbsp;списку 3</strong></span><br>
+<br>
+Модифицируйте программу упр. 18 так, чтобы дочерняя нить засыпала на&nbsp;одну секунду между исполнениями каждого шага сортировки (между перестановками записей в&nbsp;списке). При&nbsp;этом можно будет наблюдать процесс сортировки по&nbsp;шагам.<br>
+<br>
+20. <span class=cl-green> <strong>Использование блокировки чтения-записи</strong></span><br>
+<br>
+Модифицируйте программу упр. 18 так, чтобы вместо мутекса использовалась блокировка чтения-записи.<br>
+<br>
+21. <span class=cl-green> <strong>Использование блокировки чтения-записи 2</strong></span><br>
+<br>
+Модифицируйте аналогичным образом программу упр. 19<br>
+<br>
+22. <em><strong>Обедающие философы 2</strong></em><br>
+<br>
+Решите задачу упр. 10 при&nbsp;помощи атомарного захвата вилок. Когда философ может взять одну вилку, но&nbsp;не может взять другую, он&nbsp;должен положить вилку на&nbsp;стол и&nbsp;ждать, пока освободятся обе&nbsp;вилки. <br>
+<br>
+Рекомендация: создайте еще&nbsp;мутекс forks и&nbsp;условную переменную. При&nbsp;попытке взять вилку философ должен захватывать forks и&nbsp;проверять доступность обоих вилок при&nbsp;помощи pthread_trylock(3C). Если одна из&nbsp;вилок недоступна, философ должен освободить вторую вилку (если он&nbsp;успел ее&nbsp;захватить) и&nbsp;заснуть на&nbsp;условной переменной. Освобождая вилки, философ должен оповещать остальных философов об&nbsp;этом при&nbsp;помощи условной переменной. Тщательно продумайте процедуру захвата и&nbsp;освобождения мутексов, чтобы избежать ошибок потерянного пробуждения.<br>
+<br>
+23. <span class=cl-green> <strong>Sleepsort 2 (огласите весь список)</strong></span><br>
+<br>
+Переделайте программу упражнения 6 так, чтобы нити не&nbsp;выводили строки в&nbsp;стандартный поток вывода, а&nbsp;формировали из&nbsp;них связный список с&nbsp;порядком записей, соответствующим порядку сортировки. После завершения всех «сортирующих» нитей, одна из&nbsp;нитей (возможно, но&nbsp;не обязательно основная) должна выводить весь список. Обратите внимание, что&nbsp;доступ к&nbsp;списку необходимо синхронизовать<br>
+<br>
+24. <em><strong>Производственная линия</strong></em><br>
+<br>
+Разработайте имитатор производственной линии, изготавливающей винтики (widget). Винтик собирается из&nbsp;детали C&nbsp;и модуля, который, в&nbsp;свою очередь, состоит из&nbsp;деталей A&nbsp;и B. Для&nbsp;изготовления детали A&nbsp;требуется 1 секунда, В&nbsp;– две&nbsp;секунды, С&nbsp;– три&nbsp;секунды. Задержку изготовления деталей имитируйте при&nbsp;помощи sleep. Используйте семафоры-счетчики.<br>
+<br>
+25. <em><strong>Производитель-потребитель</strong></em><br>
+<br>
+Реализуйтеj очередь сообщений, которая может использоваться для&nbsp;обмена данными между двумя или&nbsp;большим количеством нитей. Реализация очереди должна поддерживать функции <br>
+<textarea class=code rows=6 readonly>void mymsginit(queue *); 
+void mymsqdrop(queue *);
+void mymsgdestroy(queue *);
+int mymsgput(queue *, char * msg);
+int mymsgget(queue *, char * buf, size_t bufsize);</textarea><br>
+<br>
+Допускается реализация на&nbsp;C++ с&nbsp;заменой mymsginit и&nbsp;mymsgdestroy на&nbsp;конструктор и&nbsp;деструктор, а&nbsp;операций get&nbsp;и&nbsp;put на&nbsp;соответствующие методы.<br>
+mymsgput принимает в&nbsp;качестве параметра ASCIIZ строку символов, обрезает ее&nbsp;до 80 символов (если это&nbsp;необходимо) и&nbsp;помещает ее&nbsp;в очередь. Если очередь содержит более 10 записей, mymsgput блокируется. Функция возвращает количество переданных символов.<br>
+mymsgget возвращает первую запись из&nbsp;очереди, обрезая ее&nbsp;до размера пользовательского буфера (если это&nbsp;необходимо). В&nbsp;любом случае, запись извлекается из&nbsp;очереди полностью. Если очередь пуста, mymsgget блокируется. Функция возвращает количество прочитанных символов.<br>
+mymsgdrop должна приводить к&nbsp;разблокированию ожидающих операций get&nbsp;и&nbsp;put. Ожидавшие вызовы и&nbsp;все последующие вызовы get&nbsp;и&nbsp;put должны возвращать 0.<br>
+mymsqdestroy должна вызываться после того, как&nbsp;будет известно, что&nbsp;ни&nbsp;одна нить больше не&nbsp;попытается выполнять операции над&nbsp;очередью.<br>
+<br>
+Необходимо продемонстрировать работу очереди с&nbsp;двумя производителями и&nbsp;двумя потребителями.<br>
+<br>
+Для&nbsp;синхронизации доступа к&nbsp;очереди используйте семафоры-счетчики.<br>
+<br>
+26. <em><strong>Производитель-потребитель 2</strong></em><br>
+<br>
+Реализуйте задачу 25 с&nbsp;использованием условных переменных и&nbsp;минимально необходимого числа мутексов.<br>
+<br>
+27. <span class=cl-blue> <strong>Многопоточный сервер</strong></span><br>
+<br>
+Реализуйте сервер, который принимает TCP&nbsp;соединения и&nbsp;транслирует их. Сервер должен получать из&nbsp;командной строки следующие параметры:<br>
+<br>
+<ol type=1><li> Номер порта P, на&nbsp;котором следует слушать.
+<li> Имя&nbsp;или IP-адрес узла N, на&nbsp;который следует транслировать соединения.
+<li> Номер порта P', на&nbsp;который следует транслировать соединения.</ol>
+<br>
+Сервер принимает все&nbsp;входящие запросы на&nbsp;установление соединения на&nbsp;порт P. Для&nbsp;каждого такого соединения он&nbsp;открывает соединение с&nbsp;портом P' на&nbsp;сервере N. Затем он&nbsp;транслирует все&nbsp;данные, получаемые от&nbsp;клиента, серверу N, а&nbsp;все данные, получаемые от&nbsp;сервера N&nbsp;– клиенту. Если сервер N&nbsp;или клиент разрывают соединение, наш&nbsp;сервер также должен разорвать соединение. Если сервер N&nbsp;отказывает в&nbsp;установлении соединения, следует разорвать клиентское соединение.<br>
+<br>
+Сервер должен обеспечивать трансляцию 510 соединений при&nbsp;лимите количества открытых файлов на&nbsp;процесс 1024. Сервер не&nbsp;должен быть многопоточным и&nbsp;никогда не&nbsp;должен блокироваться при&nbsp;операциях чтения и&nbsp;записи. Не&nbsp;следует использовать неблокирующиеся сокеты. Следует использовать select или&nbsp;poll.<br>
+<br>
+28. <span class=cl-blue> <strong>Псевдомногопоточный HTTP-клиент</strong></span><br>
+<br>
+Реализуйте простой HTTP-клиент. Он&nbsp;принимает один параметр командной строки – URL. Клиент делает запрос по&nbsp;указанному URL&nbsp;и&nbsp;выдает тело ответа на&nbsp;терминал как&nbsp;текст (т.е. если в&nbsp;ответе HTML, то&nbsp;распечатывает его&nbsp;исходный текст без&nbsp;форматирования). Вывод производится по&nbsp;мере того, как&nbsp;данные поступают из&nbsp;HTTP-соединения. Когда будет выведено более экрана (более 25 строк) данных, клиент должен продолжить прием данных, но&nbsp;должен остановить вывод и&nbsp;выдать приглашение Press space to&nbsp;scroll down.<br>
+<br>
+При&nbsp;нажатии пользователем клиент должен вывести следующий экран данных. Для&nbsp;одновременного считывания данных с&nbsp;терминала и&nbsp;из сетевого соединения используйте системный вызов select.<br>
+<br>
+29. <span class=cl-blue> <strong>Псевдомногопоточный HTTP-клиент 2</strong></span><br>
+<br>
+Реализуте задачу упр. 28, используя системные вызовы aio_read/aio_write.<br>
+<br>
+30. <span class=cl-blue> <strong>Многопоточный HTTP-клиент</strong></span><br>
+<br>
+Реализуйте задачу упр. 28, используя две&nbsp;нити, одну для&nbsp;считывания данных из&nbsp;сетевого соединения, другую для&nbsp;взаимодействия с&nbsp;пользователем.<br>
+<br>
+31. <span class=cl-blue> <strong>Псевдомногопоточный кэширующий прокси</strong></span><br>
+<br>
+Реализуйте простой кэширующий HTTP-proxy с&nbsp;кэшем в&nbsp;оперативной памяти. <br>
+<br>
+Прокси должен быть реализован как&nbsp;один процесс и&nbsp;один поток, использующий для&nbsp;одновременной работы с&nbsp;несколькими сетевыми соединениями системный вызов select или&nbsp;poll. Прокси должен обеспечивать одновременную работу нескольких клиентов (один клиент не&nbsp;должен ждать завершения запроса или&nbsp;этапа обработки запроса другого клиента).<br>
+<br>
+32. <strong>Многопоточный кэширующий прокси</strong><br>
+<br>
+Реализовать задачу 31, создавая для&nbsp;каждого входящего HTTP-соединения свою нить. При&nbsp;невозможности создать поток допускается блокировать входящие соединения или&nbsp;возвращать ошибку.<br>
+<br>
+33. <strong>Многопоточный кэширующий прокси с&nbsp;рабочими потоками</strong><br>
+<br>
+Реализовать задачу 31, используя рабочие потоки (worked threads). При&nbsp;запуске прокси должен принимать параметр, целое число, указывающее размер пула потоков. Прокси должен запустить указанное число нитей. Необходимо обеспечить одновременную обработку количества запросов, превосходящего количество нитей в&nbsp;пуле; блокировка входящих соединений недопустима. Разумеется, при&nbsp;этом каждая из&nbsp;нитей в&nbsp;разные моменты времени будет вынуждена обрабатывать разные соединения. Для&nbsp;управления соединениями используйте select или&nbsp;poll.<br>
+<br>
+<a name=knownissues href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/KnownIssues?v=pum">Known&nbsp;Issues</a><br>
+<br> 
+ <br style=clear:both>&nbsp;
+</div>
+ <div class=filesheader>
+ Много файлов (3). 
+ [<a href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks?show_files=1#files">Показать файлы/форму</a>]
+ </div>
+ 
+ <div class=commentsheader>
+ Много комментариев (12). 
+ [<a href="http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks?show_comments=1#comments">Показать комментарии/форму</a>]
+ </div>
+ <form action=http://parallels.nsu.ru/WackoWiki/TextSearch>
+<div class=footer>
+<a href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/revisions title="Нажмите, чтобы увидеть список изменений">2021-09-01 16:00:03</a> |
+Владелец: <a name=fatbrother href="http://parallels.nsu.ru/WackoWiki/FatBrother?v=iyn">Fat&nbsp;Brother</a> | <a href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/settings>Свойства</a> | <a href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/watch><img src=data:image/gif;base64,R0lGODlhEAAQAPcWADVSawBgs4CAgExMTOXs8j09PdTg6uDs9rzH0dHd5wAqTyRAWQA6bbjL3I+iswAdNQBNj9nZ2bOzs+z0+gAAAGZmZv///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABYALAAAAAAQABAAAAiCAC0IHDjwn0GDBBNaMDih4T+FBSf8aygR4sKDFB9CnEjRoUUBEjFqTDiAYceRAgv8E8CyZMaBJSvInFlhgEcLDBQ0MEAAQoB/EAgYAFBRoIQHByb4DABhAgAJAkZGWOAgKYSmCB5EgAjgQYKGWS1akGCh64OnYreSJbtVrIWtbRUGBAA7 title=Наблюдать alt=Наблюдать align=middle border=0></a> | 
+<a href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/print target=_new><img src="data:image/gif;base64,R0lGODlhEAAQAJECAP///wAAAP///wAAACH5BAEAAAIALAAAAAAQABAAAAIplI+py+EfmAig1tjA05Janm3Y4lkjAqVOUn4Xq20m7M5obR9qKvV+UgAAOw==" title="Версия для печати" alt="Версия для печати" align=middle border=0></a>| <a href=http://parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks/site>Для сайта</a> | 
+ <span class="searchbar nobr">Поиск: <input type=text name=phrase size=15 style="border:none;border-bottom:1px solid #CCCCAA;padding:0px;margin:0px" value></span>
+</div>
+</form>
+<div class=copyright>
+Powered by <a href=http://wackowiki.com/WackoWiki target=_blank title class=outerlink>WackoWiki R4.2</a></div>

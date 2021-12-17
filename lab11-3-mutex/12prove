@@ -1,0 +1,21 @@
+[] - wait
+{} - work
+
+2 mutexes - 4 states
+3 mutexes - 8 states
+
+2 workers in the same room - indeterminate behaviour, we can't decide who exit
+
+[A] {B} - is not possible, indeterminate behaviour
+if one goes to other room, we can't decide who'll go to the empty room:
+[A, B] {}
+
+[] {} [] - is not possible with 2 mutexes, system has 6 states:
+
+[A] {B} []
+[A] {} [B]
+[] {A} [B]
+[B] {A} []
+[B] {} [A]
+[] {B} [A]
+-> goto 1

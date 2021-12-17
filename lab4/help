@@ -1,0 +1,3 @@
+setcanceltype http://src.illumos.org/source/xref/illumos-gate/usr/src/lib/libc/port/threads/cancel.c?r=5ad42b1b#149
+cancel http://src.illumos.org/source/xref/illumos-gate/usr/src/lib/libc/port/threads/cancel.c?r=5ad42b1b#36
+sigaction_handler http://src.illumos.org/source/xref/illumos-gate/usr/src/lib/libc/port/threads/sigaction.c?r=bc0e9132#288
